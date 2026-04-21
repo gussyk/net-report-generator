@@ -31,7 +31,8 @@ Ingresar el rango de red cuando se solicite:
 INGRESE LA IP: 192.168.1.0/24
 
 El reporte se genera como reporte.pdf en la misma carpeta.
-
+## ⚠️ Uso ético
+Esta herramienta es solo para uso educativo y en redes propias.
 ## 🌐 ¿Cómo saber mi rango de red?
 
 En Windows ejecutar ipconfig y buscar la Dirección IPv4.
