@@ -1,3 +1,4 @@
+#librerias
 import scapy.all as scapy
 import socket
 import datetime
@@ -15,7 +16,7 @@ print("""
 ║                                              ║
 ╚══════════════════════════════════════════════╝
 """)
-
+#funcion que escanea la red, obtiene ip y mac
 def escanear_red(ip_rango):
    solicitud =  scapy.ARP(pdst=ip_rango)
    broadcast =  scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -27,6 +28,7 @@ def escanear_red(ip_rango):
       macs = r[1].hwsrc
       listaipmc.append({"ip": ips, "mac": macs})
    return listaipmc
+#funcion que escanea puertos buscando los abiertos
 def escanear_puertos(ip):
    puertos = [22, 80, 443, 3389, 8080]
    puertos_abiertos = []
@@ -39,7 +41,7 @@ def escanear_puertos(ip):
        s.close()
    return puertos_abiertos
       
-
+#obtiene los hostnames si es que tiene si no es desconosido
 def obtener_hostnames(ip):
     try:
         hostname = socket.gethostbyaddr(ip)[0]
@@ -50,7 +52,7 @@ def obtener_hostnames(ip):
 
 
 
-
+#logica para generar los pdfs
 def generar_pdf(dispositivos):
     pdf = FPDF()
     pdf.add_page()
@@ -70,8 +72,11 @@ def generar_pdf(dispositivos):
         pdf.cell(0, 10, txt=f" puertos: {pt}", ln=True)
     pdf.output("reporte.pdf")
 
-
+#programa principal
 ip_rangoo = input("INGRESE LA IP: ")
+
+
+
 dispositivos = escanear_red(ip_rangoo)
 for d in dispositivos:
     puertos = escanear_puertos(d["ip"])
